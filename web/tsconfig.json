@@ -18,7 +18,7 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "boardgame/*": ["./src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
