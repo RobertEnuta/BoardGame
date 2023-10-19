@@ -1,9 +1,19 @@
 import { type Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./src/**/*.tsx"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
+      colors: {
+        "bg-pink": "#8C2BAC",
+        "bg-purple-1": "#5027D8",
+        "bg-purple-2": "#281B54",
+      },
+    },
   },
   plugins: [],
 } satisfies Config;
