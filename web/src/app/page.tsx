@@ -1,20 +1,16 @@
 import Image from "next/image";
-import Navbar from "~/components/Navbar";
+import Typebar from "~/components/Typebar";
 import Sidebar from "~/components/Sidebar";
 import Timeline from "~/components/Timeline";
 
 export default function HomePage() {
   return (
-    <main className="flex h-fit w-full place-items-stretch justify-between">
+    <main className=" flex h-fit w-full flex-row  ">
       <Sidebar />
-      <div className=" w-full justify-center md:max-w-2xl">
-        <Navbar />
-        <div className="flex h-screen justify-center">
-          {/* <div key={post.id}>Post</div> */}
-          <Timeline />
-        </div>
+      <div className="mx-2 flex-1 justify-center">
+        <Typebar />
+        <Timeline />
       </div>
-      <div></div>
     </main>
   );
 }

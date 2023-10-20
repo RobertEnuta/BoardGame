@@ -13,6 +13,10 @@ export default {
         "bg-purple-1": "#5027D8",
         "bg-purple-2": "#281B54",
       },
+      maxWidth: {
+        bar: "180px",
+        post: "1400px",
+      },
     },
   },
   plugins: [],
