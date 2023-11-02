@@ -23,7 +23,7 @@ const NAVIGATION = [
 
 function Sidebar() {
   return (
-    <nav className="max-w-bar mr-2 flex content-around justify-center text-slate-900">
+    <nav className="mr-2 flex max-w-bar content-around justify-center overflow-hidden text-slate-900">
       <div className=" mr-2 flex-1 justify-self-start rounded-r-md bg-white px-2 pt-2">
         <div className="self-center">
           {NAVIGATION.map((item) => (
