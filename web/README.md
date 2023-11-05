@@ -6,3 +6,5 @@ This project is a social media site where users can post about their favourite t
 
 - [Next.js](https://nextjs.org)
 - [Tailwind CSS](https://tailwindcss.com)
+- [NextAuth.js](https://next-auth.js.org)
+- [Prisma](https://www.prisma.io)
