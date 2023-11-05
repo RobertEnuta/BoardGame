@@ -12,8 +12,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <main className={`font-sans ${inter.variable}`}>
-      <Analytics />
       <Component {...pageProps} />
+      <Analytics />
     </main>
   );
 };
