@@ -2,6 +2,24 @@ import Link from "next/link";
 import React from "react";
 
 import * as home from "./home.png";
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { getPFP } from "./User";
+
+function getUser() {
+  const { isSignedIn, user, isLoaded } = useUser();
+
+  return { isSignedIn, user, isLoaded };
+}
+
+// var url: string = "/user.png/";
+// function getPFP(itemName: String) {
+//   if (getUser()?.isSignedIn && itemName == "Profile") {
+//     url = String(getUser()?.user?.imageUrl);
+//   } else {
+//     url = "/user.png/";
+//   }
+//   return <img className="h-8 w-8" src={url} />;
+// }
 
 const NAVIGATION = [
   {
@@ -29,14 +47,17 @@ function Sidebar() {
           {NAVIGATION.map((item) => (
             <Link href={`/${item.url}`} key={item.name}>
               <div className="m-2 grid auto-cols-max grid-flow-col place-content-evenly justify-center rounded-lg border bg-slate-50 p-1 pt-2 hover:bg-slate-400">
-                {item.icon}
+                {item.name == "Profile" ? getPFP() : item.icon}
                 {item.name}
               </div>
             </Link>
           ))}
         </div>
         <button className="m-2 grow self-end justify-self-center rounded-lg border bg-amber-300 bg-opacity-40 px-4 py-2 font-bold hover:bg-opacity-80">
-          Login
+          <SignInButton />
+        </button>
+        <button className="m-2 grow self-end justify-self-center rounded-lg border bg-amber-300 bg-opacity-40 px-4 py-2 font-bold hover:bg-opacity-80">
+          <SignOutButton />
         </button>
       </div>
     </nav>
