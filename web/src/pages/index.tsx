@@ -5,10 +5,14 @@ import Sidebar from "~/components/Sidebar";
 import Timeline from "~/components/Timeline";
 import Typebar from "~/components/Typebar";
 
+//trpc
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const { data } = api.post.getAllPosts.useQuery();
+  // //trpc
+  // const { data, isLoading } = api.post.getAllPosts.useQuery();
+  // if (isLoading) return <div>Loading page...</div>;
+  // if (!data) return <div> Something went wrong! </div>;
 
   return (
     <>
@@ -23,9 +27,6 @@ export default function Home() {
           <Typebar />
           <Timeline />
         </div>
-        <p className="text-2xl text-white">
-          {data?.map((post) => <div key={post.postId}>{post.body}</div>)}
-        </p>
       </main>
     </>
   );

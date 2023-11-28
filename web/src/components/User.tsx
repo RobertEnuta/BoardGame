@@ -1,8 +1,9 @@
-import { SignInButton, SignOutButton, useUser as UseUser } from "@clerk/nextjs";
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import Image from "next/image";
 
 function GetUser() {
   // withServerSideAuth;
-  const { isSignedIn, user, isLoaded } = UseUser();
+  const { isSignedIn, user, isLoaded } = useUser();
 
   return { isSignedIn, user, isLoaded };
 }
@@ -27,5 +28,5 @@ export function getProfileSrc() {
 }
 
 export default function User() {
-  return UseUser();
+  return useUser();
 }

@@ -8,19 +8,18 @@ datasource db {
   relationMode = "prisma"
 }
 
-model User {
-  userId    Int    @id @default(autoincrement())
-  name  String  @db.VarChar(26)
-  email String
+// model User {
+//   userId    String    @id @default(cuid())
+//   name  String  @db.VarChar(26)
 
-  @@index([name])
-}
+//   @@index([name])
+// }
 
 model Post {
-  postId     Int    @id @default(autoincrement())
+  postId     String    @id @default(cuid())
   body   String @db.VarChar(255)
   likes  Int
-  userId Int
+  userId String
 
   @@index([postId])
   @@index([userId])
