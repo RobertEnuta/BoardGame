@@ -10,6 +10,12 @@ export const postRouter = createTRPCRouter({
         greeting: `Hello ${input.text}`,
       };
     }),
+  getAllPosts: publicProcedure.query(({ ctx }) => {
+    return ctx.db.post.findMany();
+  }),
+  getAllUsers: publicProcedure.query(({ ctx }) => {
+    return ctx.db.user.findMany();
+  }),
 
   //   create: publicProcedure
   //     .input(z.object({ name: z.string().min(1) }))

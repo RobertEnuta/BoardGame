@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -12,9 +9,19 @@ datasource db {
 }
 
 model User {
-    id        Int      @id @default(autoincrement())
-    name      String
-    email     String
+  userId    Int    @id @default(autoincrement())
+  name  String  @db.VarChar(26)
+  email String
 
-    @@index([name])
+  @@index([name])
+}
+
+model Post {
+  postId     Int    @id @default(autoincrement())
+  body   String @db.VarChar(255)
+  likes  Int
+  userId Int
+
+  @@index([postId])
+  @@index([userId])
 }

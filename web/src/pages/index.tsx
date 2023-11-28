@@ -1,3 +1,4 @@
+import { getBody } from "@trpc/client/dist/links/internals/httpUtils";
 import Head from "next/head";
 import Link from "next/link";
 import Sidebar from "~/components/Sidebar";
@@ -7,7 +8,7 @@ import Typebar from "~/components/Typebar";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  // const hello = api.post.hello.useQuery({ text: "from tRPC" });
+  const { data } = api.post.getAllPosts.useQuery();
 
   return (
     <>
@@ -22,9 +23,9 @@ export default function Home() {
           <Typebar />
           <Timeline />
         </div>
-        {/* <p className="text-2xl text-white">
-          {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-        </p> */}
+        <p className="text-2xl text-white">
+          {data?.map((post) => <div key={post.postId}>{post.body}</div>)}
+        </p>
       </main>
     </>
   );
