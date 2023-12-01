@@ -8,7 +8,7 @@ function GetUser() {
   return { isSignedIn, user, isLoaded };
 }
 
-var url: string = "/user.png/";
+let url = "/user.png/";
 export function getPFP() {
   if (GetUser()?.isSignedIn) {
     url = String(GetUser()?.user?.imageUrl);

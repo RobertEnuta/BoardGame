@@ -5,7 +5,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 const filterUserForClient = (user: User) => {
-  return { id: user.id, username: user.username, imageUrl: user.imageUrl };
+  return { id: user.id, username: user.username, imageUrl: user.imageUrl, role: user.gender };
 };
 
 export const postRouter = createTRPCRouter({

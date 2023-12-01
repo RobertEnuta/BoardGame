@@ -10,11 +10,11 @@ import {
 } from "@clerk/nextjs";
 import { getPFP } from "./User";
 
-function getUser() {
+const GetUser = () => {
   const { isSignedIn, user, isLoaded } = useUser();
 
   return { isSignedIn, user, isLoaded };
-}
+};
 const NAVIGATION = [
   {
     name: "Home",
@@ -47,12 +47,12 @@ function Sidebar() {
             </Link>
           ))}
         </div>
-        {!getUser().isSignedIn && (
+        {!GetUser().isSignedIn && (
           <button className="m-2 grow self-end justify-self-center rounded-lg border bg-amber-300 bg-opacity-40 px-4 py-2 font-bold hover:bg-opacity-80">
             <SignInButton />
           </button>
         )}
-        {getUser().isSignedIn && (
+        {GetUser().isSignedIn && (
           <button className="m-2 grow self-end justify-self-center rounded-lg border bg-amber-300 bg-opacity-40 px-4 py-2 font-bold hover:bg-opacity-80">
             <SignOutButton />
           </button>
