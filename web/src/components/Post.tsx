@@ -2,6 +2,10 @@ import { User } from "@clerk/nextjs/dist/types/server";
 import React from "react";
 import { RouterOutputs } from "~/utils/api";
 import Image from "next/image";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 const ShortenLikes = (nr: number) => {
   if (nr > 999) {
@@ -27,13 +31,21 @@ export default function Post(props: PostWithUser) {
           width={80}
           height={80}
         />
-        <div className="self-center">{props.user.username}</div>
+        <div className="self-center font-medium">@{props.user.username}</div>
       </div>
-      <div className="TEXT w-full grow self-center">{props.post.body}</div>
-
+      {/* body */}
+      <div className="flex h-full w-full grow flex-col gap-2 self-center">
+        <span className="flex grow-0 text-sm text-slate-500">
+          {String(dayjs(props.post.createdAt).fromNow())}
+        </span>
+        <div className="TEXT w-full grow basis-20 self-center text-lg font-medium">
+          {props.post.body}
+        </div>
+      </div>
+      {/* interactions */}
       <div
-        onClick={Like}
         className="INTERACTIONS grid h-32 grid-flow-row place-content-center content-around self-center"
+        onClick={Like}
       >
         <div className=" self-center">
           {ShortenLikes(props.post.likes)}

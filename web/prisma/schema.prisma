@@ -19,6 +19,7 @@ model Post {
   body   String @db.VarChar(255)
   likes  Int
   userId String
+  createdAt DateTime @default(now())
 
   @@index([postId])
   @@index([userId])
