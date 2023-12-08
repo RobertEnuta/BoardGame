@@ -23,9 +23,11 @@ export default function Home() {
       </Head>
       <main className=" scrollbar-hide flex h-screen w-full flex-row overflow-hidden ">
         <Sidebar />
-        <div className="mx-2 flex-1 justify-center">
+        <div className="mx-2 flex-auto justify-center">
           <Typebar />
-          <Timeline />
+          <div className="mx-2 flex-auto justify-center self-center">
+            <Timeline />
+          </div>
         </div>
       </main>
     </>

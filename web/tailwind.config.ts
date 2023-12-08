@@ -17,6 +17,9 @@ export default {
         bar: "180px",
         post: "1400px",
       },
+      padding: {
+        neg: "-8px",
+      },
     },
   },
   plugins: [],
