@@ -1,6 +1,7 @@
 import { User } from "@clerk/nextjs/dist/types/server";
 import React from "react";
 import { RouterOutputs } from "~/utils/api";
+import Image from "next/image";
 
 const ShortenLikes = (nr: number) => {
   if (nr > 999) {
@@ -19,10 +20,12 @@ export default function Post(props: PostWithUser) {
   return (
     <div className="POST flex grow items-stretch gap-2 rounded-lg border border-black bg-white  p-2">
       <div className="POSTER flex h-full max-w-sm flex-col place-content-center content-around self-center">
-        <img
+        <Image
           src={props.user.imageUrl}
           alt="pfp"
           className="h-20 w-20 grow self-center rounded-full"
+          width={80}
+          height={80}
         />
         <div className="self-center">{props.user.username}</div>
       </div>

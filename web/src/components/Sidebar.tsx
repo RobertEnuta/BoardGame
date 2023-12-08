@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
+import Image from "next/image";
 import * as home from "./home.png";
 import {
   SignInButton,
@@ -18,12 +19,28 @@ const GetUser = () => {
 const NAVIGATION = [
   {
     name: "Home",
-    icon: <img className="h-8 w-8" src="/home.png" />,
+    icon: (
+      <Image
+        className="h-8 w-8"
+        src="/home.png"
+        alt="home"
+        width={32}
+        height={32}
+      />
+    ),
     url: "",
   },
   {
     name: "Profile",
-    icon: <img className="h-8 w-8" src="/user.png/" />,
+    icon: (
+      <Image
+        className="h-8 w-8"
+        src="/user.png/"
+        alt="pfp"
+        width={32}
+        height={32}
+      />
+    ),
     url: "profile",
   },
 ];
