@@ -26,11 +26,6 @@ const NAVIGATION = [
     icon: <img className="h-8 w-8" src="/user.png/" />,
     url: "profile",
   },
-  // {
-  //   name: "Search",
-  //   icon: <img className="h-8 w-8" src="/search.png/" />,
-  //   url: "search",
-  // },
 ];
 
 function Sidebar() {

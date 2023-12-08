@@ -1,4 +1,5 @@
 import React from "react";
+import { getProfileSrc } from "./User";
 
 const Log = () => {
   console.log("clicked");
@@ -7,7 +8,10 @@ const Log = () => {
 function Typebar() {
   return (
     <div className="sticky top-2 flex flex-row items-center justify-center pb-2">
-      <img src="/user.png" className="h-12 w-12 rounded-full border bg-white" />
+      <img
+        src={getProfileSrc()}
+        className="h-12 w-12 rounded-full border border-black bg-white"
+      />
       <div className="m-2 flex grow items-center rounded-xl border border-t-0 bg-white px-2 py-4 text-slate-900 ">
         <input
           placeholder="Start typing here!"
