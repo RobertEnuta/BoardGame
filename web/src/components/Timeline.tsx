@@ -1,6 +1,7 @@
 import React from "react";
 import Post from "./Post";
 import { RouterOutputs, api } from "~/utils/api";
+import { PageLoading } from "./assets/Spinner";
 
 export default function Timeline() {
   type PostWithUser = RouterOutputs["post"]["getAllPosts"][number];
@@ -14,7 +15,7 @@ export default function Timeline() {
   };
 
   const { data, isLoading } = api.post.getAllPosts.useQuery();
-  if (isLoading) return <div>Loading page...</div>;
+  if (isLoading) return <PageLoading size={60} />;
   if (!data) return <div> Something went wrong! </div>;
   return (
     <div className="scrollbar-hide flex h-screen w-full flex-col content-center overflow-auto">

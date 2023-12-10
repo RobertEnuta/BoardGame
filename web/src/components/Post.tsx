@@ -4,6 +4,7 @@ import { RouterOutputs } from "~/utils/api";
 import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { LikesSVG } from "./assets/Likes";
 
 dayjs.extend(relativeTime);
 
@@ -15,31 +16,33 @@ const ShortenLikes = (nr: number) => {
   return nr;
 };
 
+var liked = false;
 const Like = () => {
-  console.log("liked");
+  liked = !liked;
+  console.log(liked);
 };
 
 type PostWithUser = RouterOutputs["post"]["getAllPosts"][number];
-export default function Post(props: PostWithUser) {
+export default function Post(data: PostWithUser) {
   return (
     <div className="POST flex grow items-stretch gap-2 rounded-lg border border-black bg-white  p-2">
       <div className="POSTER flex h-full max-w-sm flex-col place-content-center content-around self-center">
         <Image
-          src={props.user.imageUrl}
+          src={data.user.imageUrl}
           alt="pfp"
           className="h-20 w-20 grow self-center rounded-full"
           width={80}
           height={80}
         />
-        <div className="self-center font-medium">@{props.user.username}</div>
+        <div className="self-center font-medium">@{data.user.username}</div>
       </div>
       {/* body */}
       <div className="flex h-full w-full grow flex-col gap-2 self-center">
         <span className="flex grow-0 text-sm text-slate-500">
-          {String(dayjs(props.post.createdAt).fromNow())}
+          {String(dayjs(data.post.createdAt).fromNow())}
         </span>
         <div className="TEXT w-full grow basis-20 self-center text-lg font-medium">
-          {props.post.body}
+          {data.post.body}
         </div>
       </div>
       {/* interactions */}
@@ -48,22 +51,9 @@ export default function Post(props: PostWithUser) {
         onClick={Like}
       >
         <div className=" self-center">
-          {ShortenLikes(props.post.likes)}
+          {ShortenLikes(data.post.likes)}
           <p>
-            <svg
-              className="hover:fill-red-500"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-              />
-            </svg>
+            <LikesSVG liked={liked} />
           </p>
         </div>
       </div>

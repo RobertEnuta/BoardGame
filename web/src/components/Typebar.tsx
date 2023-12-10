@@ -20,7 +20,7 @@ function Typebar() {
       <div className="m-2 flex grow items-center rounded-xl border border-t-0 bg-white px-2 py-4 text-slate-900 ">
         <input
           placeholder="Start typing here!"
-          className="outlin grow bg-transparent"
+          className="grow bg-transparent outline-none"
         />
         <button onClick={Log}>
           <Image
