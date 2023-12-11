@@ -16,33 +16,33 @@ const ShortenLikes = (nr: number) => {
   return nr;
 };
 
-var liked = false;
+let liked = false;
 const Like = () => {
   liked = !liked;
   console.log(liked);
 };
 
 type PostWithUser = RouterOutputs["post"]["getAllPosts"][number];
-export default function Post(data: PostWithUser) {
+export default function Post(props: PostWithUser) {
   return (
     <div className="POST flex grow items-stretch gap-2 rounded-lg border border-black bg-white  p-2">
       <div className="POSTER flex h-full max-w-sm flex-col place-content-center content-around self-center">
         <Image
-          src={data.user.imageUrl}
+          src={props.user.imageUrl}
           alt="pfp"
           className="h-20 w-20 grow self-center rounded-full"
           width={80}
           height={80}
         />
-        <div className="self-center font-medium">@{data.user.username}</div>
+        <div className="self-center font-medium">@{props.user.username}</div>
       </div>
       {/* body */}
       <div className="flex h-full w-full grow flex-col gap-2 self-center">
         <span className="flex grow-0 text-sm text-slate-500">
-          {String(dayjs(data.post.createdAt).fromNow())}
+          {String(dayjs(props.post.createdAt).fromNow())}
         </span>
         <div className="TEXT w-full grow basis-20 self-center text-lg font-medium">
-          {data.post.body}
+          {props.post.body}
         </div>
       </div>
       {/* interactions */}
@@ -51,7 +51,7 @@ export default function Post(data: PostWithUser) {
         onClick={Like}
       >
         <div className=" self-center">
-          {ShortenLikes(data.post.likes)}
+          {ShortenLikes(props.post.likes)}
           <p>
             <LikesSVG liked={liked} />
           </p>
