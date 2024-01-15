@@ -59,6 +59,7 @@ function Sidebar() {
             </Link>
           ))}
         </div>
+        <UserButton afterSignOutUrl="/" />
         {!GetUser().isSignedIn && (
           <button className="m-2 grow self-end justify-self-center rounded-lg border bg-amber-300 bg-opacity-40 px-4 py-2 font-bold hover:bg-opacity-80">
             <SignInButton />
@@ -69,7 +70,6 @@ function Sidebar() {
             <SignOutButton />
           </button>
         )}
-        <UserButton afterSignOutUrl="/" />
       </div>
     </nav>
   );

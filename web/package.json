@@ -20,6 +20,8 @@
     "@trpc/next": "^10.37.1",
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
+    "@upstash/ratelimit": "^1.0.0",
+    "@upstash/redis": "^1.28.1",
     "@vercel/analytics": "^1.1.1",
     "dayjs": "^1.11.10",
     "next": "^14.0.1",
