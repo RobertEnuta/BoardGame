@@ -1,4 +1,5 @@
 export const LikesSVG = (props: { liked?: boolean }) => {
+  const minSize = 24;
   return (
     <svg
       className={props.liked ? "fill-red-500" : "hover:fill-red-500"}
@@ -7,6 +8,7 @@ export const LikesSVG = (props: { liked?: boolean }) => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
+      style={{ minWidth: `${minSize}px`, minHeight: `${minSize}px` }}
     >
       <path
         strokeLinecap="round"

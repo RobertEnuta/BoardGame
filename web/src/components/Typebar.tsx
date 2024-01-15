@@ -10,10 +10,18 @@ const Typebar = () => {
 
   const [input, setInput] = useState("");
 
-  const { mutate } = api.post.create.useMutation();
+  const ctx = api.useContext();
+
+  const { mutate, isLoading: isPosting } = api.post.create.useMutation({
+    onSuccess: () => {
+      setInput("");
+      void ctx.post.getAllPosts.invalidate();
+    },
+  });
 
   if (!user) return null;
 
+  /// clear the typebar when clicked
   return (
     <div className="sticky top-2 flex flex-row items-center justify-center pb-2">
       <Image
@@ -30,6 +38,7 @@ const Typebar = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          disabled={isPosting}
         />
         <button onClick={() => mutate({ content: input })}>
           <Image
