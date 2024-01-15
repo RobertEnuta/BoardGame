@@ -4,6 +4,8 @@ import Image from "next/image";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 
 import { api } from "~/utils/api";
+import toast from "react-hot-toast";
+import { Spinner } from "./assets/Spinner";
 
 const Typebar = () => {
   const user = useUser();
@@ -20,6 +22,14 @@ const Typebar = () => {
     onSuccess: () => {
       setInput("");
       void ctx.post.getAllPosts.invalidate();
+    },
+    onError: (e) => {
+      const errorMessage = e.data?.zodError?.fieldErrors.content;
+      if (errorMessage && errorMessage[0]) {
+        toast.error(errorMessage[0]);
+      } else {
+        toast.error("Something went wrong! Try again later :c");
+      }
     },
   });
 
@@ -58,15 +68,28 @@ const Typebar = () => {
           onChange={(e) => setInput(e.target.value)}
           disabled={isPosting}
         />
-        <button onClick={() => mutate({ content: input })}>
-          <Image
-            src="/send.png"
-            className="m-2 h-6 w-6 self-end"
-            alt="arrow"
-            width={24}
-            height={24}
-          />
-        </button>
+
+        {/* change button to loading while the post is being created */}
+        {input !== "" && !isPosting && (
+          <button
+            onClick={() => mutate({ content: input })}
+            disabled={isPosting}
+          >
+            <Image
+              src="/send.png"
+              className="m-2 h-6 w-6 self-end"
+              alt="arrow"
+              width={24}
+              height={24}
+            />
+          </button>
+        )}
+        {isPosting && (
+          <div className="flex items-center justify-center">
+            {" "}
+            <Spinner size={40} />{" "}
+          </div>
+        )}
       </div>
     </div>
   );
