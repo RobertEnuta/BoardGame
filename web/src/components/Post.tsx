@@ -27,8 +27,9 @@ type PostWithUser = RouterOutputs["post"]["getAllPosts"][number];
 export default function Post(props: PostWithUser) {
   return (
     <div className="POST flex grow items-stretch gap-2 rounded-lg border border-black bg-white  p-2">
+      {/* user */}
       <Link
-        href={`@${props.user.username}`}
+        href={`/user/@${props.user.username}`}
         className="POSTER flex h-full max-w-sm flex-col place-content-center content-around self-center"
       >
         <div className="POSTER flex h-full max-w-sm flex-col place-content-center content-around self-center">
