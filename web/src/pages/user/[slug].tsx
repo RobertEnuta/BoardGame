@@ -40,7 +40,7 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
   return (
     <>
       <Head>
-        <title>{data.username} post</title>
+        <title>@{data.username}</title>
       </Head>
       <main className=" scrollbar-hide flex h-screen w-full flex-row overflow-hidden ">
         <Sidebar />
