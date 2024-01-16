@@ -25,8 +25,10 @@ const Typebar = () => {
     },
     onError: (e) => {
       const errorMessage = e.data?.zodError?.fieldErrors.content;
-      if (errorMessage && errorMessage[0]) {
-        toast.error(errorMessage[0]);
+      if (errorMessage) {
+        if (errorMessage[0]) {
+          toast.error(errorMessage[0]);
+        }
       } else {
         toast.error("Something went wrong! Try again later :c");
       }

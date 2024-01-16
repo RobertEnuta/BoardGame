@@ -37,7 +37,7 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
   return (
     <>
       <Head>
-        <title>{data.username}'s post</title>
+        <title>{data.username} post</title>
       </Head>
       <main className=" scrollbar-hide flex h-screen w-full flex-row overflow-hidden ">
         <div className="mx-2 flex-auto justify-center self-center">
