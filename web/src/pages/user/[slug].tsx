@@ -18,20 +18,23 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
   }
   if (!data)
     return (
-      <Link href="/" replace>
-        <div className="max-w-screen mx-24 my-12 flex max-h-screen flex-col place-content-center content-around self-center rounded-md border-4 border-black bg-white p-12 backdrop-blur-3xl">
-          <Image
-            src="/question.png"
-            alt="not found"
-            className="h-20 w-20 grow self-center rounded-full"
-            width={80}
-            height={80}
-          />
-          <div className="self-center text-5xl font-bold">
-            404! User not found!
+      <main className=" scrollbar-hide flex h-screen w-full flex-row overflow-hidden ">
+        <Sidebar />
+        <Link href="/" replace>
+          <div className="max-w-screen mx-24 my-12 flex max-h-screen flex-col place-content-center content-around self-center rounded-md border-4 border-black bg-white p-12 backdrop-blur-3xl">
+            <Image
+              src="/question.png"
+              alt="not found"
+              className="h-20 w-20 grow self-center rounded-full"
+              width={80}
+              height={80}
+            />
+            <div className="self-center text-5xl font-bold">
+              404! User not found!
+            </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </main>
     );
 
   return (
@@ -40,8 +43,21 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
         <title>{data.username} post</title>
       </Head>
       <main className=" scrollbar-hide flex h-screen w-full flex-row overflow-hidden ">
+        <Sidebar />
         <div className="mx-2 flex-auto justify-center self-center">
-          {data.username}
+          <div className="max-w-screen mx-24 my-12 flex max-h-screen flex-col place-content-center content-around self-center rounded-md border-4 border-black bg-slate-100 px-2 pt-6 backdrop-blur-3xl">
+            <Image
+              src={data.imageUrl}
+              alt="not found"
+              className="h-20 w-20 grow self-center rounded-full"
+              width={80}
+              height={80}
+            />
+            <div className="self-center pb-2 text-5xl font-bold ">
+              @{data.username}
+            </div>
+            <Timeline />
+          </div>
         </div>
       </main>
     </>

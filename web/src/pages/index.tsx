@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <main className=" scrollbar-hide flex h-screen w-full flex-row overflow-hidden ">
-        {/* <Sidebar /> */}
+        <Sidebar />
         <div className="mx-2 min-h-0 flex-auto justify-center">
           <Typebar />
           <div className="mx-2 flex-auto justify-center self-center">

@@ -28,7 +28,7 @@ const NAVIGATION = [
         height={32}
       />
     ),
-    url: "",
+    url: "/",
   },
   {
     name: "Profile",
@@ -41,17 +41,24 @@ const NAVIGATION = [
         height={32}
       />
     ),
-    url: "profile",
+    url: `/user`,
   },
 ];
 
 function Sidebar() {
   return (
     <nav className="mr-2 flex max-w-bar content-around justify-center overflow-hidden text-slate-900">
-      <div className=" mr-2 flex-1 justify-self-start rounded-r-md bg-white px-2 pt-2">
+      <div className=" mr-2 flex-1 justify-self-start rounded-r-md bg-slate-100 px-2 pt-2">
         <div className="self-center">
           {NAVIGATION.map((item) => (
-            <Link href={`/${item.url}`} key={item.name}>
+            <Link
+              href={
+                item.name == "Profile"
+                  ? `/user/@${GetUser().user?.username}`
+                  : item.url
+              }
+              key={item.name}
+            >
               <div className="m-2 grid auto-cols-max grid-flow-col place-content-evenly justify-center rounded-lg border bg-slate-50 p-1 pt-2 hover:bg-slate-400">
                 {item.name == "Profile" ? getPFP() : item.icon}
                 {item.name}
