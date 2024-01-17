@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { GetStaticProps, NextPage } from "next/types";
 import Sidebar from "~/components/Sidebar";
-import Timeline from "~/components/Timeline";
-import Typebar from "~/components/Typebar";
+import Timeline, { UserTimeline } from "~/components/Timeline";
 import { Spinner } from "~/components/assets/Spinner";
 import { generateSSGHelper } from "~/server/comps/ssgHelper";
 import { api } from "~/utils/api";
@@ -37,6 +36,22 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
       </main>
     );
 
+  const ProfileFeed = (props: { userId: string }) => {
+    const { data, isLoading } = api.post.getPostByUserId.useQuery({
+      userId: props.userId,
+    });
+
+    if (isLoading) return <Spinner />;
+
+    if (!data || data.length === 0) return <div>no posts</div>;
+
+    return (
+      <div className="flex flex-col">
+        <UserTimeline />
+      </div>
+    );
+  };
+
   return (
     <>
       <Head>
@@ -56,8 +71,8 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
             <div className="self-center pb-2 text-5xl font-bold ">
               @{data.username}
             </div>
-            <Timeline />
           </div>
+          <ProfileFeed userId={data.id} />
         </div>
       </main>
     </>

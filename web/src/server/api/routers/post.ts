@@ -52,7 +52,6 @@ export const postRouter = createTRPCRouter({
         user,
       };
     });
-
     // return posts;
   }),
 
@@ -78,4 +77,16 @@ export const postRouter = createTRPCRouter({
 
       return post;
     }),
+
+  getPostByUserId: privateProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(({ ctx, input }) =>
+      ctx.db.post.findMany({
+        where: { userId: input.userId },
+        take: 25,
+        orderBy: {
+          createdAt: "desc",
+        },
+      }),
+    ),
 });

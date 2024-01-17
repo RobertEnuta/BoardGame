@@ -3,6 +3,10 @@ import Post from "./Post";
 import { RouterOutputs, api } from "~/utils/api";
 import { PageLoading } from "./assets/Spinner";
 
+export function UserTimeline() {
+  return <div></div>;
+}
+
 export default function Timeline() {
   type PostWithUser = RouterOutputs["post"]["getAllPosts"][number];
   const PostView = (props: PostWithUser) => {
@@ -18,7 +22,7 @@ export default function Timeline() {
   if (isLoading) return <PageLoading size={60} />;
   if (!data) return <div> Something went wrong! </div>;
   return (
-    <div className="scrollbar-hide flex h-screen w-full flex-col content-center overflow-auto">
+    <div className="scrollbar-hide flex h-screen w-full flex-col content-center overflow-y-scroll pb-24">
       {data?.map((fullPost) => (
         <PostView {...fullPost} key={fullPost.post.postId} />
       ))}
