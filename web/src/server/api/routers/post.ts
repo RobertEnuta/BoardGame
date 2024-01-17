@@ -12,6 +12,7 @@ import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
 import { Redis } from "@upstash/redis"; // see below for cloudflare and fastly adapters
 import { TRPCError } from "@trpc/server";
 import { filterUserForClient } from "~/server/comps/filterUserForClient";
+import type { Post } from "@prisma/client";
 
 // Create a new ratelimiter, that allows 3 requests per 1 min
 const ratelimit = new Ratelimit({
@@ -26,7 +27,42 @@ const ratelimit = new Ratelimit({
   prefix: "@upstash/ratelimit",
 });
 
+const addUsersToPosts = async (posts: Post[]) => {
+  const users = (
+    await clerkClient.users.getUserList({
+      userId: posts.map((post) => post.userId),
+      limit: 25,
+    })
+  ).map(filterUserForClient);
+
+  return posts.map((post) => {
+    const user = users.find((user) => user.id === post.userId);
+
+    if (!user) throw new TRPCClientError("No User was found for this post");
+
+    return {
+      post,
+      user,
+    };
+  });
+};
+
+//2:41:44
 export const postRouter = createTRPCRouter({
+  getById: publicProcedure
+    .input(z.object({ postId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const post = await ctx.db.post.findUnique({
+        where: { postId: input.postId },
+      });
+
+      if (!post)
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "No post was found!",
+        });
+    }),
+
   getAllPosts: publicProcedure.query(async ({ ctx }) => {
     const posts = await ctx.db.post.findMany({
       take: 25,
@@ -35,24 +71,7 @@ export const postRouter = createTRPCRouter({
       },
     });
 
-    const users = (
-      await clerkClient.users.getUserList({
-        userId: posts.map((post) => post.userId),
-        limit: 25,
-      })
-    ).map(filterUserForClient);
-
-    return posts.map((post) => {
-      const user = users.find((user) => user.id === post.userId);
-
-      if (!user) throw new TRPCClientError("No User was found for this post");
-
-      return {
-        post,
-        user,
-      };
-    });
-    // return posts;
+    return addUsersToPosts(posts);
   }),
 
   create: privateProcedure
@@ -88,23 +107,6 @@ export const postRouter = createTRPCRouter({
           createdAt: "desc",
         },
       });
-
-      const users = (
-        await clerkClient.users.getUserList({
-          userId: posts.map((post) => post.userId),
-          limit: 25,
-        })
-      ).map(filterUserForClient);
-
-      return posts.map((post) => {
-        const user = users.find((user) => user.id === post.userId);
-
-        if (!user) throw new TRPCClientError("No User was found for this post");
-
-        return {
-          post,
-          user,
-        };
-      });
+      return addUsersToPosts(posts);
     }),
 });
