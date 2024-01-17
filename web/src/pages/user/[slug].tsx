@@ -60,11 +60,11 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
       <main className=" scrollbar-hide flex h-screen w-full flex-row overflow-hidden ">
         <Sidebar />
         <div className="mx-2 flex-auto justify-center self-center">
-          <div className="max-w-screen mx-24 my-12 flex max-h-screen flex-col place-content-center content-around self-center rounded-md border-4 border-black bg-slate-100 px-2 pt-6 backdrop-blur-3xl">
+          <div className="max-w-screen m-24 flex max-h-screen flex-col place-content-center content-around self-center rounded-md border-4 border-black bg-slate-100 px-2 pt-48 backdrop-blur-3xl">
             <Image
               src={data.imageUrl}
-              alt="not found"
-              className="h-20 w-20 grow self-center rounded-full"
+              alt="Profile Picture"
+              className="h-20 w-20 grow self-center rounded-full "
               width={80}
               height={80}
             />
