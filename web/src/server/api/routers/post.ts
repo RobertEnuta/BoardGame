@@ -80,13 +80,31 @@ export const postRouter = createTRPCRouter({
 
   getPostByUserId: privateProcedure
     .input(z.object({ userId: z.string() }))
-    .query(({ ctx, input }) =>
-      ctx.db.post.findMany({
+    .query(async ({ ctx, input }) => {
+      const posts = await ctx.db.post.findMany({
         where: { userId: input.userId },
         take: 25,
         orderBy: {
           createdAt: "desc",
         },
-      }),
-    ),
+      });
+
+      const users = (
+        await clerkClient.users.getUserList({
+          userId: posts.map((post) => post.userId),
+          limit: 25,
+        })
+      ).map(filterUserForClient);
+
+      return posts.map((post) => {
+        const user = users.find((user) => user.id === post.userId);
+
+        if (!user) throw new TRPCClientError("No User was found for this post");
+
+        return {
+          post,
+          user,
+        };
+      });
+    }),
 });

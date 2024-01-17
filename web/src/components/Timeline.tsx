@@ -3,10 +3,6 @@ import Post from "./Post";
 import { RouterOutputs, api } from "~/utils/api";
 import { PageLoading } from "./assets/Spinner";
 
-export function UserTimeline() {
-  return <div></div>;
-}
-
 export default function Timeline() {
   type PostWithUser = RouterOutputs["post"]["getAllPosts"][number];
   const PostView = (props: PostWithUser) => {

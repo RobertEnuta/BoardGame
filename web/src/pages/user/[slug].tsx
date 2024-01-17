@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { GetStaticProps, NextPage } from "next/types";
 import Sidebar from "~/components/Sidebar";
-import Timeline, { UserTimeline } from "~/components/Timeline";
 import { Spinner } from "~/components/assets/Spinner";
+import { UserTimeline } from "~/components/assets/UserTimeline";
 import { generateSSGHelper } from "~/server/comps/ssgHelper";
 import { api } from "~/utils/api";
 
@@ -47,7 +47,7 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
 
     return (
       <div className="flex flex-col">
-        <UserTimeline />
+        <UserTimeline userId={props.userId} />
       </div>
     );
   };
@@ -71,8 +71,8 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
             <div className="self-center pb-2 text-5xl font-bold ">
               @{data.username}
             </div>
+            <ProfileFeed userId={data.id} />
           </div>
-          <ProfileFeed userId={data.id} />
         </div>
       </main>
     </>
