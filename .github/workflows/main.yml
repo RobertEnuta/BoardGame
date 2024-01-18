@@ -17,3 +17,20 @@ jobs:
         run: |
           cd web/
           npm install
+
+      - name: Typecheck
+        run: |
+          cd web/
+          npm run typecheck
+
+      - name: Lint
+        run: |
+          cd web/
+          npm run lint
+
+      - name: Print Environment Variable
+        run: |
+          cd web/
+          echo $MY_ENV_VAR
+
+             
