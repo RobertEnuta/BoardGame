@@ -14,7 +14,7 @@ const PostPage: NextPage<{ postId: string }> = ({ postId }) => {
     postId,
   });
   if (isLoading) {
-    <Spinner></Spinner>;
+    return <Spinner />;
   }
   if (!data)
     return (
