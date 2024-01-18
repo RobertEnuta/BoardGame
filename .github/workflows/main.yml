@@ -14,13 +14,21 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          cd ../web
+          npm install
 
       - name: Typecheck
-        run: npm run typecheck
+        run: |
+          cd ../web
+          npm run typecheck
 
       - name: Lint
-        run: npm run lint
+        run: |
+          cd ../web
+          npm run lint
 
       - name: Print Environment Variable
-        run: echo $MY_ENV_VAR
+        run: |
+          cd ../web
+          echo $MY_ENV_VAR
