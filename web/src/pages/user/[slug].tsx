@@ -53,8 +53,12 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
     );
   };
 
-  const { user } = useUser();
-  console.log(user?.organizationMemberships[0]?.role);
+  const GetUser = () => {
+    const { isSignedIn, user, isLoaded } = useUser();
+
+    return { isSignedIn, user, isLoaded };
+  };
+  // console.log(user?.organizationMemberships[0]?.role);
 
   return (
     <>
@@ -72,7 +76,7 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
               width={80}
               height={80}
             />
-            {user?.username == data.username ? (
+            {GetUser().user?.username == data.username ? (
               <UserButton afterSignOutUrl="/" />
             ) : (
               <div> </div>
