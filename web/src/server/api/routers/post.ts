@@ -47,7 +47,6 @@ const addUsersToPosts = async (posts: Post[]) => {
   });
 };
 
-//2:41:44
 export const postRouter = createTRPCRouter({
   getById: publicProcedure
     .input(z.object({ postId: z.string() }))
@@ -61,6 +60,8 @@ export const postRouter = createTRPCRouter({
           code: "NOT_FOUND",
           message: "No post was found!",
         });
+
+      return (await addUsersToPosts([post]))[0];
     }),
 
   getAllPosts: publicProcedure.query(async ({ ctx }) => {
@@ -108,5 +109,28 @@ export const postRouter = createTRPCRouter({
         },
       });
       return addUsersToPosts(posts);
+    }),
+
+  //>>> IDK <<<
+  deletePost: privateProcedure
+    .input(z.object({ postId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const post = await ctx.db.post.delete({
+        where: {
+          postId: input.postId,
+        },
+      });
+      return post;
+    }),
+
+  deletePostsByUserId: privateProcedure
+    .input(z.object({ userId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const post = await ctx.db.post.deleteMany({
+        where: {
+          userId: input.userId,
+        },
+      });
+      return post;
     }),
 });

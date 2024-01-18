@@ -1,3 +1,4 @@
+import { UserButton, useUser } from "@clerk/nextjs";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -52,6 +53,9 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
     );
   };
 
+  const { user } = useUser();
+  console.log(user?.organizationMemberships[0]?.role);
+
   return (
     <>
       <Head>
@@ -68,9 +72,15 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
               width={80}
               height={80}
             />
+            {user?.username == data.username ? (
+              <UserButton afterSignOutUrl="/" />
+            ) : (
+              <div> </div>
+            )}
             <div className="self-center pb-2 text-5xl font-bold ">
               @{data.username}
             </div>
+
             <ProfileFeed userId={data.id} />
           </div>
         </div>

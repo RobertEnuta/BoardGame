@@ -15,7 +15,6 @@ const filterUserForClient = (user: User) => {
     id: user.id,
     username: user.username,
     imageUrl: user.imageUrl,
-    role: user.gender,
   };
 };
 
@@ -34,6 +33,46 @@ export const profileRouter = createTRPCRouter({
         });
       }
 
+      return filterUserForClient(user);
+    }),
+  getUserById: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const [user] = await clerkClient.users.getUserList({
+        userId: [input.id],
+      });
+
+      if (!user) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "User was not found!",
+        });
+      }
+
+      return filterUserForClient(user);
+    }),
+  /// >>>> IDK <<<<
+  deleteUser: privateProcedure
+    .input(
+      z.object({
+        adminId: z.string(),
+        // adminRole: z.string(),
+        userId: z.string(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const admin = await clerkClient.users.getUser(input.adminId);
+      // if (input.adminRole !== "org:admin") {
+      //   return;
+      // }
+
+      const user = await clerkClient.users.deleteUser(input.userId);
+      if (!user) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "User was not found!",
+        });
+      }
       return filterUserForClient(user);
     }),
 });

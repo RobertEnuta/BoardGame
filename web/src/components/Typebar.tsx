@@ -53,14 +53,6 @@ const Typebar = () => {
           </SignInButton>
         </div>
       )}
-      <UserButton
-        afterSignOutUrl="/"
-        // appearance={{
-        //   elements: {
-        //     rootBox: "w-48",
-        //   },
-        // }}
-      />
       <div className="m-2 flex grow items-center rounded-xl border border-t-0 bg-white px-2 py-4 text-slate-900 ">
         <input
           placeholder="Start typing here!"
