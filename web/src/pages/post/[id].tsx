@@ -14,7 +14,7 @@ const PostPage: NextPage<{ postId: string }> = ({ postId }) => {
     postId,
   });
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner size={60} />;
   }
   if (!data)
     return (
@@ -32,7 +32,14 @@ const PostPage: NextPage<{ postId: string }> = ({ postId }) => {
       <Head>
         <title>{`@${data.user.username}'s post`}</title>
       </Head>
-      <Post {...data} />
+      <main className=" scrollbar-hide flex h-screen w-full flex-row overflow-hidden ">
+        <Sidebar />
+        <div className="mx-2 flex-auto justify-center self-center">
+          <div className="max-w-screen m-24 flex max-h-screen flex-col place-content-center content-around self-center rounded-lg">
+            <Post {...data} />
+          </div>
+        </div>
+      </main>
     </>
   );
 };

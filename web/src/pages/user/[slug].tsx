@@ -67,8 +67,8 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
       </Head>
       <main className=" scrollbar-hide flex h-screen w-full flex-row overflow-hidden ">
         <Sidebar />
-        <div className="mx-2 flex-auto justify-center self-center">
-          <div className="max-w-screen m-24 flex max-h-screen flex-col place-content-center content-around self-center rounded-md border-4 border-black bg-slate-100 px-2 pt-48 backdrop-blur-3xl">
+        <div className="mx-2 flex-auto justify-center self-center ">
+          <div className="max-w-screen  flex max-h-screen flex-col place-content-center content-around self-center rounded-md border-4 border-black bg-slate-100 px-2 pt-48 backdrop-blur-3xl">
             <Image
               src={data.imageUrl}
               alt="Profile Picture"
@@ -84,9 +84,8 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
             <div className="self-center pb-2 text-5xl font-bold ">
               @{data.username}
             </div>
-
-            <ProfileFeed userId={data.id} />
           </div>
+          <ProfileFeed userId={data.id} />
         </div>
       </main>
     </>
