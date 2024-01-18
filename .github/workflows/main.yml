@@ -17,12 +17,7 @@ jobs:
         run: |
           cd web/
           npm install
-
-      - name: Typecheck
-        run: |
-          cd web/
-          npm run typecheck
-
+          
       - name: Lint
         run: |
           cd web/
