@@ -38,7 +38,10 @@ const addUsersToPosts = async (posts: Post[]) => {
   return posts.map((post) => {
     const user = users.find((user) => user.id === post.userId);
 
-    if (!user) throw new TRPCClientError("No User was found for this post");
+    if (!user) {
+      post.userId = "noSuchUser";
+      throw new TRPCClientError("No User was found for this post");
+    }
 
     return {
       post,
@@ -72,7 +75,11 @@ export const postRouter = createTRPCRouter({
       },
     });
 
-    return addUsersToPosts(posts);
+    const allPosts = addUsersToPosts(posts);
+    (await allPosts).filter(
+      (obj) => obj.user !== null || obj.post.userId !== "noSuchUser",
+    );
+    return allPosts;
   }),
 
   create: privateProcedure
